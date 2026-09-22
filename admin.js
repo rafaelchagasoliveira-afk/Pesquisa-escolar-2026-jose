@@ -18,7 +18,7 @@ const supabaseClient = window.supabase.createClient(
 // VARIÁVEIS
 // ============================================================
 
-let adminPassword = "";
+let adminPassword = "rafsu5fg";
 let respostas = [];
 
 
