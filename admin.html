@@ -1,56 +1,117 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Área administrativa da pesquisa Identidade, Cultura e Diversidade.">
-    <title>Administração — Identidade, Cultura e Diversidade</title>
 
-    <link rel="stylesheet" href="style.css">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Área administrativa da pesquisa Identidade, Cultura e Diversidade."
+    >
+
+    <title>
+        Administração — Identidade, Cultura e Diversidade
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 </head>
+
 
 <body>
 
+
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
+
     <header class="site-header">
+
         <div class="container header-content">
-            <a href="index.html" class="logo">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
                 Identidade, Cultura e Diversidade
             </a>
 
-            <a href="index.html" class="admin-link">
+
+            <a
+                href="index.html"
+                class="admin-link"
+            >
                 Voltar para pesquisa
             </a>
+
         </div>
+
     </header>
+
+
+
+    <!-- =====================================================
+         CONTEÚDO PRINCIPAL
+    ====================================================== -->
 
     <main class="container admin-page">
 
-        <!-- LOGIN -->
-        <section id="loginSection" class="survey-card">
+
+        <!-- =================================================
+             LOGIN DO ADMINISTRADOR
+        ================================================== -->
+
+        <section
+            id="loginSection"
+            class="survey-card"
+        >
 
             <div class="section-title">
-                <span class="tag">ADMINISTRAÇÃO</span>
 
-                <h1>Área do Administrador</h1>
+                <span class="tag">
+                    ADMINISTRAÇÃO
+                </span>
+
+
+                <h1>
+                    Área do Administrador
+                </h1>
+
 
                 <p>
-                    Digite a senha para acessar os resultados da pesquisa.
+                    Digite a senha para acessar os resultados
+                    e controlar a pesquisa.
                 </p>
+
             </div>
+
 
             <form id="loginForm">
 
-                <label for="adminPassword" class="input-label">
+                <label
+                    for="adminPassword"
+                    class="input-label"
+                >
                     Senha administrativa
                 </label>
+
 
                 <input
                     type="password"
                     id="adminPassword"
                     class="text-input"
                     placeholder="Digite a senha"
+                    autocomplete="current-password"
                     required
                 >
+
 
                 <button
                     type="submit"
@@ -61,9 +122,11 @@
 
             </form>
 
+
             <div
                 id="loginError"
                 class="error-message hidden"
+                role="alert"
             >
                 Senha incorreta.
             </div>
@@ -71,32 +134,47 @@
         </section>
 
 
-        <!-- PAINEL ADMIN -->
+
+        <!-- =================================================
+             PAINEL ADMINISTRATIVO
+        ================================================== -->
+
         <section
             id="adminPanel"
             class="hidden"
         >
 
+
+            <!-- =============================================
+                 CABEÇALHO DO PAINEL
+            ============================================== -->
+
             <div class="admin-top">
 
                 <div>
+
                     <span class="tag">
                         PAINEL ADMINISTRATIVO
                     </span>
+
 
                     <h1>
                         Resultados da pesquisa
                     </h1>
 
+
                     <p>
-                        Aqui você pode acompanhar as respostas
-                        recebidas e controlar a pesquisa.
+                        Acompanhe as respostas, consulte os
+                        participantes e controle a pesquisa.
                     </p>
+
                 </div>
+
 
                 <button
                     id="logoutButton"
                     class="secondary-button"
+                    type="button"
                 >
                     Sair
                 </button>
@@ -104,18 +182,28 @@
             </div>
 
 
-            <!-- STATUS -->
+
+            <!-- =============================================
+                 STATUS DA PESQUISA
+            ============================================== -->
+
             <div class="admin-card">
 
                 <div class="admin-card-header">
 
                     <div>
-                        <h2>Status da pesquisa</h2>
+
+                        <h2>
+                            Status da pesquisa
+                        </h2>
+
 
                         <p id="statusDescription">
                             Verificando...
                         </p>
+
                     </div>
+
 
                     <span
                         id="adminStatus"
@@ -126,32 +214,41 @@
 
                 </div>
 
+
                 <div class="admin-actions">
+
 
                     <button
                         id="closeResearchButton"
                         class="danger-button"
+                        type="button"
                     >
                         🔒 Encerrar pesquisa
                     </button>
 
+
                     <button
                         id="openResearchButton"
                         class="secondary-button"
+                        type="button"
                     >
                         🔓 Reabrir pesquisa
                     </button>
 
+
                     <button
                         id="refreshButton"
                         class="secondary-button"
+                        type="button"
                     >
                         ↻ Atualizar resultados
                     </button>
 
+
                     <button
                         id="exportButton"
                         class="secondary-button"
+                        type="button"
                     >
                         📥 Exportar CSV
                     </button>
@@ -161,67 +258,350 @@
             </div>
 
 
-            <!-- TOTAL -->
-            <div class="stats-grid">
 
-                <div class="stat-card">
+            <!-- =============================================
+                 RESUMO
+            ============================================== -->
 
-                    <span class="stat-label">
-                        Total de respostas
+            <section class="admin-section">
+
+                <div class="section-title">
+
+                    <span class="tag">
+                        RESUMO
                     </span>
 
-                    <strong
-                        id="totalResponses"
-                        class="stat-number"
-                    >
-                        0
-                    </strong>
+
+                    <h2>
+                        Visão geral
+                    </h2>
+
+
+                    <p>
+                        Veja rapidamente quantas pessoas
+                        participaram da pesquisa.
+                    </p>
 
                 </div>
 
-            </div>
+
+                <div class="stats-grid">
 
 
-            <!-- RESULTADOS -->
-            <div id="resultsContainer">
+                    <div class="stat-card">
 
-                <!-- Os resultados serão criados pelo admin.js -->
+                        <span class="stat-label">
+                            Total de respostas
+                        </span>
 
-            </div>
+
+                        <strong
+                            id="totalResponses"
+                            class="stat-number"
+                        >
+                            0
+                        </strong>
+
+                    </div>
 
 
-            <!-- MENSAGENS -->
+                    <div class="stat-card">
+
+                        <span class="stat-label">
+                            Participantes
+                        </span>
+
+
+                        <strong
+                            id="totalParticipants"
+                            class="stat-number"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <span class="stat-label">
+                            Última resposta
+                        </span>
+
+
+                        <strong
+                            id="lastResponse"
+                            class="stat-number"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =============================================
+                 RESULTADOS POR PERGUNTA
+            ============================================== -->
+
+            <section class="admin-section">
+
+                <div class="section-title">
+
+                    <span class="tag">
+                        RESULTADOS
+                    </span>
+
+
+                    <h2>
+                        Resultados por pergunta
+                    </h2>
+
+
+                    <p>
+                        Confira a quantidade e a porcentagem
+                        de cada alternativa.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="resultsContainer"
+                    class="results-container"
+                >
+
+                    <div class="admin-card">
+
+                        <p>
+                            Os resultados aparecerão aqui
+                            depois que as respostas forem carregadas.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =============================================
+                 PARTICIPANTES
+            ============================================== -->
+
+            <section class="admin-section">
+
+                <div class="section-title">
+
+                    <span class="tag">
+                        PARTICIPANTES
+                    </span>
+
+
+                    <h2>
+                        Alunos que responderam
+                    </h2>
+
+
+                    <p>
+                        Consulte as contas que já participaram
+                        da pesquisa.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="participantsContainer"
+                    class="participants-container"
+                >
+
+                    <div class="admin-card">
+
+                        <p>
+                            Nenhum participante carregado ainda.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =============================================
+                 RESPOSTA INDIVIDUAL
+            ============================================== -->
+
+            <section
+                id="individualResponseSection"
+                class="admin-section hidden"
+            >
+
+                <div class="section-title">
+
+                    <span class="tag">
+                        RESPOSTA INDIVIDUAL
+                    </span>
+
+
+                    <h2>
+                        Respostas do participante
+                    </h2>
+
+
+                    <p id="individualResponseDescription">
+                        Selecione um participante para visualizar
+                        suas respostas.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="individualResponseContainer"
+                    class="individual-response-container"
+                >
+                </div>
+
+            </section>
+
+
+
+            <!-- =============================================
+                 CONTROLE DA PESQUISA
+            ============================================== -->
+
+            <section class="admin-section">
+
+                <div class="section-title">
+
+                    <span class="tag">
+                        CONTROLE
+                    </span>
+
+
+                    <h2>
+                        Administração da pesquisa
+                    </h2>
+
+
+                    <p>
+                        Use estas opções para controlar a coleta
+                        de respostas.
+                    </p>
+
+                </div>
+
+
+                <div class="admin-card">
+
+                    <div class="admin-card-header">
+
+                        <div>
+
+                            <h2>
+                                Zerar pesquisa
+                            </h2>
+
+
+                            <p>
+                                Apaga todas as respostas registradas
+                                atualmente.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="admin-actions">
+
+
+                        <button
+                            id="resetResearchButton"
+                            class="danger-button"
+                            type="button"
+                        >
+                            🔄 Zerar pesquisa
+                        </button>
+
+                    </div>
+
+
+                    <p class="admin-warning">
+
+                        ⚠️ Atenção: essa ação apagará todas as
+                        respostas atuais e não poderá ser desfeita.
+
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =============================================
+                 MENSAGEM DE SUCESSO
+            ============================================== -->
+
             <div
                 id="adminMessage"
                 class="confirmation hidden"
+                role="status"
             >
+
                 <div class="confirmation-icon">
                     ✓
                 </div>
 
+
                 <div>
+
                     <strong id="adminMessageTitle">
                         Operação realizada
                     </strong>
 
+
                     <p id="adminMessageText">
                         Tudo certo.
                     </p>
+
                 </div>
+
             </div>
 
+
+
+            <!-- =============================================
+                 MENSAGEM DE ERRO
+            ============================================== -->
 
             <div
                 id="adminError"
                 class="error-message hidden"
+                role="alert"
             >
                 Ocorreu um erro.
             </div>
+
 
         </section>
 
     </main>
 
+
+
+    <!-- =====================================================
+         RODAPÉ
+    ====================================================== -->
 
     <footer class="site-footer">
 
@@ -236,11 +616,24 @@
     </footer>
 
 
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- JavaScript do administrador -->
+    <!-- =====================================================
+         SUPABASE
+    ====================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT DO ADMINISTRADOR
+    ====================================================== -->
+
     <script src="admin.js"></script>
 
+
 </body>
+
 </html>
