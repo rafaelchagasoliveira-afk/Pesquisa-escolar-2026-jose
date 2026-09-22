@@ -38,7 +38,6 @@
 
         <div class="container header-content">
 
-
             <a
                 href="index.html"
                 class="logo"
@@ -53,7 +52,6 @@
             >
                 Área do Administrador
             </a>
-
 
         </div>
 
@@ -73,7 +71,6 @@
         ================================================== -->
 
         <section class="hero">
-
 
             <span class="tag">
                 PESQUISA ESCOLAR
@@ -106,6 +103,75 @@
                 ● Pesquisa aberta
             </div>
 
+        </section>
+
+
+
+        <!-- =================================================
+             ÁREA DE LOGIN
+        ================================================== -->
+
+        <section
+            id="loginContainer"
+            class="survey-card login-card"
+        >
+
+            <div class="section-title">
+
+                <span class="tag">
+                    IDENTIFICAÇÃO
+                </span>
+
+
+                <h2>
+                    Entre para participar
+                </h2>
+
+
+                <p>
+                    Para garantir que cada aluno responda apenas uma vez,
+                    entre com sua conta Google antes de participar.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="googleLoginButton"
+                class="primary-button"
+            >
+                Continuar com Google
+            </button>
+
+
+            <div
+                id="userInfo"
+                class="user-info hidden"
+            >
+
+                <p>
+                    Você está conectado como:
+                </p>
+
+                <strong id="userName">
+                    —
+                </strong>
+
+                <span id="userEmail">
+                    —
+                </span>
+
+
+                <button
+                    type="button"
+                    id="logoutButton"
+                    class="secondary-button"
+                >
+                    Sair da conta
+                </button>
+
+            </div>
 
         </section>
 
@@ -119,7 +185,6 @@
             id="closedMessage"
             class="closed-message hidden"
         >
-
 
             <div class="closed-icon">
                 🔒
@@ -140,6 +205,37 @@
 
             </div>
 
+        </section>
+
+
+
+        <!-- =================================================
+             JÁ RESPONDEU
+        ================================================== -->
+
+        <section
+            id="alreadyAnswered"
+            class="closed-message hidden"
+        >
+
+            <div class="closed-icon">
+                ✓
+            </div>
+
+
+            <div>
+
+                <h2>
+                    Você já respondeu esta pesquisa
+                </h2>
+
+
+                <p>
+                    Esta conta Google já possui uma resposta registrada.
+                    Não é possível responder novamente.
+                </p>
+
+            </div>
 
         </section>
 
@@ -151,12 +247,10 @@
 
         <section
             id="surveyContainer"
-            class="survey-card"
+            class="survey-card hidden"
         >
 
-
             <div class="section-title">
-
 
                 <span class="tag">
                     PARTICIPE
@@ -169,10 +263,9 @@
 
 
                 <p>
-                    Não é necessário informar seu nome.
+                    Você está identificado pela sua conta Google.
                     Escolha uma alternativa em cada pergunta.
                 </p>
-
 
             </div>
 
@@ -186,7 +279,6 @@
                 ================================================== -->
 
                 <fieldset>
-
 
                     <legend>
                         1. Com qual cor ou raça você se identifica?
@@ -283,7 +375,6 @@
 
                     </label>
 
-
                 </fieldset>
 
 
@@ -293,7 +384,6 @@
                 ================================================== -->
 
                 <fieldset>
-
 
                     <legend>
                         2. Qual é a sua origem familiar ou cultural?
@@ -390,7 +480,6 @@
 
                     </label>
 
-
                 </fieldset>
 
 
@@ -400,7 +489,6 @@
                 ================================================== -->
 
                 <fieldset>
-
 
                     <legend>
                         3. Você participa ou conhece alguma tradição
@@ -438,7 +526,6 @@
 
                     </label>
 
-
                 </fieldset>
 
 
@@ -448,7 +535,6 @@
                 ================================================== -->
 
                 <fieldset>
-
 
                     <legend>
                         4. Você costuma participar de festas ou eventos
@@ -516,7 +602,6 @@
 
                     </label>
 
-
                 </fieldset>
 
 
@@ -526,7 +611,6 @@
                 ================================================== -->
 
                 <fieldset>
-
 
                     <legend>
                         5. Você considera importante preservar a cultura
@@ -594,7 +678,6 @@
 
                     </label>
 
-
                 </fieldset>
 
 
@@ -626,7 +709,6 @@
                 role="status"
             >
 
-
                 <div class="confirmation-icon">
                     ✓
                 </div>
@@ -644,7 +726,6 @@
                     </p>
 
                 </div>
-
 
             </div>
 
@@ -668,6 +749,7 @@
         </section>
 
 
+
     </main>
 
 
@@ -678,17 +760,13 @@
 
     <footer class="site-footer">
 
-
         <div class="container">
-
 
             <p>
                 Projeto escolar — Identidade, Cultura e Diversidade
             </p>
 
-
         </div>
-
 
     </footer>
 
