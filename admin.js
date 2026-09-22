@@ -8,22 +8,23 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXAiLCJyZWYiOiJwa250a2JuYXp5a3FlaGlsZ2djdCIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNzg5NzQ5ODk4LCJleHAiOjIxMDUzMjU4OTh9.K7aDh9ikINZuhL7RFiM91ENgcyARnZDlnvsIBGc8WQA";
 
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
 
 // ============================================================
 // VARIÁVEIS
 // ============================================================
 
-let adminPassword = "rafsu5fg";
+let adminPassword = "";
 let respostas = [];
 
 
 // ============================================================
-// ELEMENTOS DO HTML
+// ELEMENTOS
 // ============================================================
 
 const loginForm =
@@ -141,7 +142,6 @@ loginForm.addEventListener(
             return;
         }
 
-
         try {
 
             const { data, error } =
@@ -152,16 +152,18 @@ loginForm.addEventListener(
                     }
                 );
 
-
             if (error) {
+                console.error(
+                    "Erro RPC admin_get_responses:",
+                    error
+                );
+
                 throw error;
             }
-
 
             adminPassword = senha;
 
             respostas = data || [];
-
 
             loginSection.classList.add(
                 "hidden"
@@ -171,12 +173,9 @@ loginForm.addEventListener(
                 "hidden"
             );
 
-
             adminPasswordInput.value = "";
 
-
             await carregarPainel();
-
 
         } catch (error) {
 
@@ -184,7 +183,6 @@ loginForm.addEventListener(
                 "Erro no login:",
                 error
             );
-
 
             loginError.textContent =
                 "Senha incorreta ou erro ao acessar o painel.";
@@ -224,16 +222,13 @@ async function verificarStatus() {
                 "get_research_status"
             );
 
-
         if (error) {
             throw error;
         }
 
-
         atualizarStatus(
             data === true
         );
-
 
     } catch (error) {
 
@@ -241,7 +236,6 @@ async function verificarStatus() {
             "Erro ao verificar status:",
             error
         );
-
 
         mostrarErro(
             "Não foi possível verificar o status da pesquisa."
@@ -251,7 +245,7 @@ async function verificarStatus() {
 
 
 // ============================================================
-// ATUALIZAR STATUS VISUAL
+// ATUALIZAR STATUS
 // ============================================================
 
 function atualizarStatus(isOpen) {
@@ -273,7 +267,6 @@ function atualizarStatus(isOpen) {
 
         openResearchButton.disabled =
             true;
-
 
     } else {
 
@@ -313,14 +306,11 @@ async function carregarRespostas() {
                 }
             );
 
-
         if (error) {
             throw error;
         }
 
-
         respostas = data || [];
-
 
         atualizarResumo();
 
@@ -328,14 +318,12 @@ async function carregarRespostas() {
 
         mostrarParticipantes();
 
-
     } catch (error) {
 
         console.error(
             "Erro ao carregar respostas:",
             error
         );
-
 
         mostrarErro(
             "Não foi possível carregar os resultados."
@@ -345,7 +333,7 @@ async function carregarRespostas() {
 
 
 // ============================================================
-// ATUALIZAR RESUMO
+// RESUMO
 // ============================================================
 
 function atualizarResumo() {
@@ -353,17 +341,15 @@ function atualizarResumo() {
     const total =
         respostas.length;
 
-
-    totalResponses.textContent =
-        total;
-
-
-    if (totalParticipants) {
-
-        totalParticipants.textContent =
+    if (totalResponses) {
+        totalResponses.textContent =
             total;
     }
 
+    if (totalParticipants) {
+        totalParticipants.textContent =
+            total;
+    }
 
     if (
         lastResponse &&
@@ -382,7 +368,6 @@ function atualizarResumo() {
                     (a, b) =>
                         b - a
                 );
-
 
         lastResponse.textContent =
             formatarDataHora(
@@ -403,8 +388,11 @@ function atualizarResumo() {
 
 function mostrarResultados() {
 
-    resultsContainer.innerHTML = "";
+    if (!resultsContainer) {
+        return;
+    }
 
+    resultsContainer.innerHTML = "";
 
     if (respostas.length === 0) {
 
@@ -428,15 +416,12 @@ function mostrarResultados() {
         return;
     }
 
-
     const perguntas = [
 
         {
             titulo:
                 "1. Com qual cor ou raça você se identifica?",
-
             campo: "q1",
-
             opcoes: [
                 "Branca",
                 "Preta",
@@ -447,13 +432,10 @@ function mostrarResultados() {
             ]
         },
 
-
         {
             titulo:
                 "2. Qual é a sua origem familiar ou cultural?",
-
             campo: "q2",
-
             opcoes: [
                 "Brasileira",
                 "Indígena",
@@ -464,26 +446,20 @@ function mostrarResultados() {
             ]
         },
 
-
         {
             titulo:
                 "3. Você participa ou conhece alguma tradição cultural da sua família ou comunidade?",
-
             campo: "q3",
-
             opcoes: [
                 "Sim",
                 "Não"
             ]
         },
 
-
         {
             titulo:
                 "4. Você costuma participar de festas ou eventos culturais da sua comunidade?",
-
             campo: "q4",
-
             opcoes: [
                 "Sempre",
                 "Às vezes",
@@ -492,13 +468,10 @@ function mostrarResultados() {
             ]
         },
 
-
         {
             titulo:
                 "5. Você considera importante preservar a cultura e as tradições da sua região?",
-
             campo: "q5",
-
             opcoes: [
                 "Sim, muito importante",
                 "Sim, importante",
@@ -506,23 +479,18 @@ function mostrarResultados() {
                 "Não considero importante"
             ]
         }
-
     ];
-
 
     perguntas.forEach(
         function (pergunta, indice) {
 
             const contagens = {};
 
-
             pergunta.opcoes.forEach(
                 function (opcao) {
-
                     contagens[opcao] = 0;
                 }
             );
-
 
             respostas.forEach(
                 function (resposta) {
@@ -532,7 +500,6 @@ function mostrarResultados() {
                             pergunta.campo
                         ];
 
-
                     if (
                         Object.prototype
                             .hasOwnProperty
@@ -541,22 +508,18 @@ function mostrarResultados() {
                                 valor
                             )
                     ) {
-
                         contagens[valor]++;
                     }
                 }
             );
-
 
             const card =
                 document.createElement(
                     "div"
                 );
 
-
             card.className =
                 "admin-card result-card";
-
 
             let html = `
 
@@ -576,13 +539,11 @@ function mostrarResultados() {
 
             `;
 
-
             pergunta.opcoes.forEach(
                 function (opcao) {
 
                     const quantidade =
                         contagens[opcao];
-
 
                     const porcentagem =
                         respostas.length > 0
@@ -591,7 +552,6 @@ function mostrarResultados() {
                                 respostas.length
                             ) * 100
                             : 0;
-
 
                     html += `
 
@@ -612,7 +572,6 @@ function mostrarResultados() {
 
                             </div>
 
-
                             <div class="result-bar">
 
                                 <div
@@ -628,10 +587,8 @@ function mostrarResultados() {
                 }
             );
 
-
             card.innerHTML =
                 html;
-
 
             resultsContainer.appendChild(
                 card
@@ -651,9 +608,7 @@ function mostrarParticipantes() {
         return;
     }
 
-
     participantsContainer.innerHTML = "";
-
 
     if (respostas.length === 0) {
 
@@ -677,7 +632,6 @@ function mostrarParticipantes() {
         return;
     }
 
-
     respostas.forEach(
         function (resposta, indice) {
 
@@ -686,20 +640,16 @@ function mostrarParticipantes() {
                     "div"
                 );
 
-
             item.className =
                 "admin-card participant-item";
-
 
             const nome =
                 resposta.nome ||
                 "Nome não informado";
 
-
             const email =
                 resposta.email ||
                 "E-mail não informado";
-
 
             const data =
                 resposta.created_at
@@ -710,7 +660,6 @@ function mostrarParticipantes() {
                     )
                     : "Data não disponível";
 
-
             item.innerHTML = `
 
                 <div class="participant-info">
@@ -718,26 +667,19 @@ function mostrarParticipantes() {
                     <div>
 
                         <h3>
-                            ${escapeHTML(
-                                nome
-                            )}
+                            ${escapeHTML(nome)}
                         </h3>
 
                         <p>
-                            ${escapeHTML(
-                                email
-                            )}
+                            ${escapeHTML(email)}
                         </p>
 
                         <small>
                             Respondeu em:
-                            ${escapeHTML(
-                                data
-                            )}
+                            ${escapeHTML(data)}
                         </small>
 
                     </div>
-
 
                     <button
                         type="button"
@@ -751,23 +693,23 @@ function mostrarParticipantes() {
 
             `;
 
-
             const botao =
                 item.querySelector(
                     "[data-participant-index]"
                 );
 
+            if (botao) {
 
-            botao.addEventListener(
-                "click",
-                function () {
+                botao.addEventListener(
+                    "click",
+                    function () {
 
-                    mostrarRespostaIndividual(
-                        indice
-                    );
-                }
-            );
-
+                        mostrarRespostaIndividual(
+                            indice
+                        );
+                    }
+                );
+            }
 
             participantsContainer.appendChild(
                 item
@@ -778,7 +720,7 @@ function mostrarParticipantes() {
 
 
 // ============================================================
-// VER RESPOSTA INDIVIDUAL
+// RESPOSTA INDIVIDUAL
 // ============================================================
 
 function mostrarRespostaIndividual(
@@ -788,47 +730,34 @@ function mostrarRespostaIndividual(
     const resposta =
         respostas[indice];
 
-
     if (!resposta) {
         return;
     }
-
 
     const nome =
         resposta.nome ||
         "Participante";
 
-
     const email =
         resposta.email ||
         "E-mail não informado";
 
-
-    if (
-        individualResponseSection
-    ) {
+    if (individualResponseSection) {
 
         individualResponseSection.classList.remove(
             "hidden"
         );
     }
 
-
-    if (
-        individualResponseDescription
-    ) {
+    if (individualResponseDescription) {
 
         individualResponseDescription.textContent =
             `${nome} — ${email}`;
     }
 
-
-    if (
-        !individualResponseContainer
-    ) {
+    if (!individualResponseContainer) {
         return;
     }
-
 
     const perguntas = [
 
@@ -866,9 +795,7 @@ function mostrarRespostaIndividual(
                 "Você considera importante preservar a cultura e as tradições da sua região?",
             campo: "q5"
         }
-
     ];
-
 
     let html = `
 
@@ -885,7 +812,6 @@ function mostrarRespostaIndividual(
             <hr>
 
     `;
-
 
     perguntas.forEach(
         function (pergunta) {
@@ -915,17 +841,14 @@ function mostrarRespostaIndividual(
         }
     );
 
-
     html += `
 
         </div>
 
     `;
 
-
     individualResponseContainer.innerHTML =
         html;
-
 
     individualResponseSection.scrollIntoView({
         behavior: "smooth",
@@ -942,16 +865,13 @@ closeResearchButton.addEventListener(
     "click",
     async function () {
 
-        const confirmar =
-            confirm(
+        if (
+            !confirm(
                 "Tem certeza que deseja encerrar a pesquisa?"
-            );
-
-
-        if (!confirmar) {
+            )
+        ) {
             return;
         }
-
 
         try {
 
@@ -961,31 +881,28 @@ closeResearchButton.addEventListener(
                     {
                         admin_password:
                             adminPassword,
-
                         new_status:
                             false
                     }
                 );
 
-
             if (error) {
                 throw error;
             }
 
-
             atualizarStatus(false);
-
 
             mostrarMensagem(
                 "Pesquisa encerrada",
                 "A coleta de novas respostas foi encerrada."
             );
 
-
         } catch (error) {
 
-            console.error(error);
-
+            console.error(
+                "Erro ao encerrar:",
+                error
+            );
 
             mostrarErro(
                 "Não foi possível encerrar a pesquisa."
@@ -1011,31 +928,28 @@ openResearchButton.addEventListener(
                     {
                         admin_password:
                             adminPassword,
-
                         new_status:
                             true
                     }
                 );
 
-
             if (error) {
                 throw error;
             }
 
-
             atualizarStatus(true);
-
 
             mostrarMensagem(
                 "Pesquisa reaberta",
                 "A pesquisa voltou a receber respostas."
             );
 
-
         } catch (error) {
 
-            console.error(error);
-
+            console.error(
+                "Erro ao reabrir:",
+                error
+            );
 
             mostrarErro(
                 "Não foi possível reabrir a pesquisa."
@@ -1046,7 +960,7 @@ openResearchButton.addEventListener(
 
 
 // ============================================================
-// ATUALIZAR RESULTADOS
+// ATUALIZAR
 // ============================================================
 
 refreshButton.addEventListener(
@@ -1059,16 +973,13 @@ refreshButton.addEventListener(
         refreshButton.textContent =
             "Atualizando...";
 
-
         await carregarPainel();
-
 
         refreshButton.disabled =
             false;
 
         refreshButton.textContent =
             "↻ Atualizar resultados";
-
 
         mostrarMensagem(
             "Resultados atualizados",
@@ -1088,20 +999,17 @@ if (resetResearchButton) {
         "click",
         async function () {
 
-            const confirmar =
-                confirm(
+            if (
+                !confirm(
                     "ATENÇÃO!\n\n" +
                     "Isso apagará TODAS as respostas " +
                     "da pesquisa.\n\n" +
                     "Essa ação não poderá ser desfeita.\n\n" +
                     "Deseja realmente zerar a pesquisa?"
-                );
-
-
-            if (!confirmar) {
+                )
+            ) {
                 return;
             }
-
 
             try {
 
@@ -1110,7 +1018,6 @@ if (resetResearchButton) {
 
                 resetResearchButton.textContent =
                     "Zerando...";
-
 
                 const { data, error } =
                     await supabaseClient.rpc(
@@ -1121,14 +1028,11 @@ if (resetResearchButton) {
                         }
                     );
 
-
                 if (error) {
                     throw error;
                 }
 
-
                 respostas = [];
-
 
                 atualizarResumo();
 
@@ -1136,44 +1040,34 @@ if (resetResearchButton) {
 
                 mostrarParticipantes();
 
-
-                if (
-                    individualResponseSection
-                ) {
+                if (individualResponseSection) {
 
                     individualResponseSection.classList.add(
                         "hidden"
                     );
                 }
 
-
-                if (
-                    individualResponseContainer
-                ) {
+                if (individualResponseContainer) {
 
                     individualResponseContainer.innerHTML =
                         "";
                 }
-
 
                 mostrarMensagem(
                     "Pesquisa zerada",
                     `${data || 0} resposta(s) foram apagadas. A pesquisa está pronta para uma nova coleta.`
                 );
 
-
             } catch (error) {
 
                 console.error(
-                    "Erro ao zerar pesquisa:",
+                    "Erro ao zerar:",
                     error
                 );
-
 
                 mostrarErro(
                     "Não foi possível zerar a pesquisa."
                 );
-
 
             } finally {
 
@@ -1205,72 +1099,44 @@ exportButton.addEventListener(
             return;
         }
 
-
         const cabecalho = [
-
             "Nome",
-
             "E-mail",
-
             "ID",
-
             "Pergunta 1",
-
             "Pergunta 2",
-
             "Pergunta 3",
-
             "Pergunta 4",
-
             "Pergunta 5",
-
             "Data"
-
         ];
-
 
         const linhas =
             respostas.map(
                 function (resposta) {
 
                     return [
-
                         resposta.nome,
-
                         resposta.email,
-
                         resposta.id,
-
                         resposta.q1,
-
                         resposta.q2,
-
                         resposta.q3,
-
                         resposta.q4,
-
                         resposta.q5,
-
                         resposta.created_at
-
                     ];
                 }
             );
 
-
         const csv = [
-
             cabecalho,
-
             ...linhas
-
         ]
-
             .map(
                 function (linha) {
 
                     return linha
-
                         .map(
                             function (valor) {
 
@@ -1282,13 +1148,10 @@ exportButton.addEventListener(
                                 )}"`;
                             }
                         )
-
                         .join(",");
                 }
             )
-
             .join("\n");
-
 
         const blob =
             new Blob(
@@ -1299,43 +1162,24 @@ exportButton.addEventListener(
                 }
             );
 
-
         const url =
-            URL.createObjectURL(
-                blob
-            );
-
+            URL.createObjectURL(blob);
 
         const link =
-            document.createElement(
-                "a"
-            );
-
+            document.createElement("a");
 
         link.href = url;
-
 
         link.download =
             "resultados-pesquisa-identidade-cultura-diversidade.csv";
 
-
-        document.body.appendChild(
-            link
-        );
-
+        document.body.appendChild(link);
 
         link.click();
 
+        document.body.removeChild(link);
 
-        document.body.removeChild(
-            link
-        );
-
-
-        URL.revokeObjectURL(
-            url
-        );
-
+        URL.revokeObjectURL(url);
 
         mostrarMensagem(
             "CSV exportado",
@@ -1357,7 +1201,6 @@ logoutButton.addEventListener(
 
         respostas = [];
 
-
         adminPanel.classList.add(
             "hidden"
         );
@@ -1366,22 +1209,17 @@ logoutButton.addEventListener(
             "hidden"
         );
 
-
         loginError.classList.add(
             "hidden"
         );
 
-
         resultsContainer.innerHTML =
             "";
 
-
         if (participantsContainer) {
-
             participantsContainer.innerHTML =
                 "";
         }
-
 
         if (individualResponseSection) {
 
@@ -1390,27 +1228,23 @@ logoutButton.addEventListener(
             );
         }
 
-
         if (individualResponseContainer) {
 
             individualResponseContainer.innerHTML =
                 "";
         }
 
-
-        totalResponses.textContent =
-            "0";
-
+        if (totalResponses) {
+            totalResponses.textContent =
+                "0";
+        }
 
         if (totalParticipants) {
-
             totalParticipants.textContent =
                 "0";
         }
 
-
         if (lastResponse) {
-
             lastResponse.textContent =
                 "—";
         }
@@ -1427,34 +1261,39 @@ function mostrarMensagem(
     texto
 ) {
 
-    adminError.classList.add(
-        "hidden"
-    );
+    if (adminError) {
+        adminError.classList.add(
+            "hidden"
+        );
+    }
 
+    if (adminMessageTitle) {
+        adminMessageTitle.textContent =
+            titulo;
+    }
 
-    adminMessageTitle.textContent =
-        titulo;
+    if (adminMessageText) {
+        adminMessageText.textContent =
+            texto;
+    }
 
+    if (adminMessage) {
 
-    adminMessageText.textContent =
-        texto;
+        adminMessage.classList.remove(
+            "hidden"
+        );
 
+        setTimeout(
+            function () {
 
-    adminMessage.classList.remove(
-        "hidden"
-    );
+                adminMessage.classList.add(
+                    "hidden"
+                );
 
-
-    setTimeout(
-        function () {
-
-            adminMessage.classList.add(
-                "hidden"
-            );
-
-        },
-        5000
-    );
+            },
+            5000
+        );
+    }
 }
 
 
@@ -1466,18 +1305,22 @@ function mostrarErro(
     texto
 ) {
 
-    adminMessage.classList.add(
-        "hidden"
-    );
+    if (adminMessage) {
 
+        adminMessage.classList.add(
+            "hidden"
+        );
+    }
 
-    adminError.textContent =
-        texto;
+    if (adminError) {
 
+        adminError.textContent =
+            texto;
 
-    adminError.classList.remove(
-        "hidden"
-    );
+        adminError.classList.remove(
+            "hidden"
+        );
+    }
 }
 
 
@@ -1487,18 +1330,24 @@ function mostrarErro(
 
 function esconderMensagens() {
 
-    adminMessage.classList.add(
-        "hidden"
-    );
+    if (adminMessage) {
 
-    adminError.classList.add(
-        "hidden"
-    );
+        adminMessage.classList.add(
+            "hidden"
+        );
+    }
+
+    if (adminError) {
+
+        adminError.classList.add(
+            "hidden"
+        );
+    }
 }
 
 
 // ============================================================
-// FORMATAR DATA E HORA
+// DATA E HORA
 // ============================================================
 
 function formatarDataHora(
@@ -1513,7 +1362,6 @@ function formatarDataHora(
         return "—";
     }
 
-
     return data.toLocaleString(
         "pt-BR",
         {
@@ -1525,7 +1373,7 @@ function formatarDataHora(
 
 
 // ============================================================
-// PROTEÇÃO CONTRA HTML
+// PROTEÇÃO HTML
 // ============================================================
 
 function escapeHTML(
